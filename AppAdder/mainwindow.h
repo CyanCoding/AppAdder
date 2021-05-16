@@ -18,6 +18,8 @@ public:
 private slots:
     void on_locateIcon_clicked();
 
+    void on_locateApp_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
