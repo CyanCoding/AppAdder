@@ -23,6 +23,9 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -148,6 +151,15 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>nameBox</tabstop>
+  <tabstop>appBox</tabstop>
+  <tabstop>locateApp</tabstop>
+  <tabstop>iconBox</tabstop>
+  <tabstop>locateIcon</tabstop>
+  <tabstop>terminalCheckbox</tabstop>
+  <tabstop>createButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
