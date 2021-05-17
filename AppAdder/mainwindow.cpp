@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
+#include <fstream>
 
 char *homedir;
 
@@ -45,6 +46,19 @@ void MainWindow::on_createButton_clicked() {
     QString appLocation = ui->appBox->text();
     QString iconLocation = ui->iconBox->text();
     bool terminalSelected = ui->terminalCheckbox->isChecked();
+
+    // Copy the image file to the /home/jason/.icons folder
+    std::string copyToLocation = homedir;
+    std::string copyFileName = (std::string)name.toUtf8().constData() + ".png";
+
+    copyToLocation += "/.icons/" + copyFileName;
+
+    std::string copyFromLocation = iconLocation.toUtf8().constData();
+
+    std::ifstream src(copyFromLocation, std::ios::binary);
+    std::ofstream dst(copyToLocation, std::ios::binary);
+
+    dst << src.rdbuf();
 
     /*
      * This is the correct form for a .desktop file:
