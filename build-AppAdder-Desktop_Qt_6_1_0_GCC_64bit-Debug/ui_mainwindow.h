@@ -33,9 +33,9 @@ public:
     QLabel *label_2;
     QLineEdit *appBox;
     QLabel *label_3;
-    QLineEdit *iconBox_3;
-    QCheckBox *checkBox;
-    QPushButton *pushButton;
+    QLineEdit *nameBox;
+    QCheckBox *terminalCheckbox;
+    QPushButton *createButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -67,15 +67,15 @@ public:
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(40, 20, 131, 21));
-        iconBox_3 = new QLineEdit(centralwidget);
-        iconBox_3->setObjectName(QString::fromUtf8("iconBox_3"));
-        iconBox_3->setGeometry(QRect(40, 50, 181, 21));
-        checkBox = new QCheckBox(centralwidget);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-        checkBox->setGeometry(QRect(40, 230, 181, 23));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(210, 270, 89, 25));
+        nameBox = new QLineEdit(centralwidget);
+        nameBox->setObjectName(QString::fromUtf8("nameBox"));
+        nameBox->setGeometry(QRect(40, 50, 181, 21));
+        terminalCheckbox = new QCheckBox(centralwidget);
+        terminalCheckbox->setObjectName(QString::fromUtf8("terminalCheckbox"));
+        terminalCheckbox->setGeometry(QRect(40, 230, 181, 23));
+        createButton = new QPushButton(centralwidget);
+        createButton->setObjectName(QString::fromUtf8("createButton"));
+        createButton->setGeometry(QRect(210, 270, 89, 25));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -93,13 +93,13 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "AppAdder", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Icon:", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Icon", nullptr));
         locateIcon->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
         locateApp->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "App/command file", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "App name", nullptr));
-        checkBox->setText(QCoreApplication::translate("MainWindow", "Open in terminal", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Create", nullptr));
+        terminalCheckbox->setText(QCoreApplication::translate("MainWindow", "Open in terminal", nullptr));
+        createButton->setText(QCoreApplication::translate("MainWindow", "Create", nullptr));
     } // retranslateUi
 
 };

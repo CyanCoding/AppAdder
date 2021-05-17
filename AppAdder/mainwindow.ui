@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Icon:</string>
+     <string>Icon</string>
     </property>
    </widget>
    <widget class="QPushButton" name="locateIcon">
@@ -99,7 +99,7 @@
      <string>App name</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="iconBox_3">
+   <widget class="QLineEdit" name="nameBox">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -109,7 +109,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="terminalCheckbox">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -122,7 +122,7 @@
      <string>Open in terminal</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="createButton">
     <property name="geometry">
      <rect>
       <x>210</x>

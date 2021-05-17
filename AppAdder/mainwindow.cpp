@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QFile>
 #include <QFileDialog>
+
 #include <iostream>
 #include <unistd.h>
 #include <sys/types.h>
@@ -36,5 +37,32 @@ void MainWindow::on_locateApp_clicked() {
 
     // Sets the icon box to the icon's file location
     ui->appBox->setText(selectedApp);
+}
+
+
+void MainWindow::on_createButton_clicked() {
+    QString name = ui->nameBox->text();
+    QString appLocation = ui->appBox->text();
+    QString iconLocation = ui->iconBox->text();
+    bool terminalSelected = ui->terminalCheckbox->isChecked();
+
+    /*
+     * This is the correct form for a .desktop file:
+     *
+     * [Desktop Entry]
+     * Name=AppAdder
+     * Exec=/home/jason/app.AppImage
+     * Terminal=false
+     * Type=Application
+     * Icon=app.png
+     * TryExec=/home/jason/app.AppImage
+     *
+     */
+
+
+    std::string fileContents = "";
+
+    fileContents += "[Desktop Entry]\n";
+    fileContents += "Name=" + (std::string)name.toUtf8().constData() + "\n"; // Name=AppAdder
 }
 

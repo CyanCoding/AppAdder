@@ -20,6 +20,8 @@ private slots:
 
     void on_locateApp_clicked();
 
+    void on_createButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
