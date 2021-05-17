@@ -47,6 +47,11 @@ void MainWindow::on_createButton_clicked() {
     QString iconLocation = ui->iconBox->text();
     bool terminalSelected = ui->terminalCheckbox->isChecked();
 
+    // Set the terminal string
+    std::string terminal = "false";
+    if (terminalSelected == true)
+        terminal = "true";
+
     // Copy the image file to the /home/jason/.icons folder
     std::string copyToLocation = homedir;
     std::string copyFileName = (std::string)name.toUtf8().constData() + ".png";
@@ -78,5 +83,6 @@ void MainWindow::on_createButton_clicked() {
 
     fileContents += "[Desktop Entry]\n";
     fileContents += "Name=" + (std::string)name.toUtf8().constData() + "\n"; // Name=AppAdder
+    fileContents += "Terminal=" + terminal + "\n"; // Terminal=false
 }
 
