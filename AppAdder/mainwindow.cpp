@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <pwd.h>
 #include <fstream>
+#include <cstdlib>
 
 char *homedir;
 
@@ -65,6 +66,15 @@ void MainWindow::on_createButton_clicked() {
 
     dst << src.rdbuf();
 
+    // Create the applications folder if it doesn't already exist
+    // /home/jason/Applications
+    std::string appsFolder = homedir;
+    appsFolder += "/Applications";
+
+    std::string command = "mkdir " + appsFolder;
+
+    std::system(command.c_str());
+
     /*
      * This is the correct form for a .desktop file:
      *
@@ -83,6 +93,9 @@ void MainWindow::on_createButton_clicked() {
 
     fileContents += "[Desktop Entry]\n";
     fileContents += "Name=" + (std::string)name.toUtf8().constData() + "\n"; // Name=AppAdder
+    fileContents += "Exec=" + (std::string)appLocation.toUtf8().constData() + "\n"; //Exec=/home/jason/app.AppImage
     fileContents += "Terminal=" + terminal + "\n"; // Terminal=false
+    fileContents += "Type=Application\n";
+    fileContents += "";
 }
 
