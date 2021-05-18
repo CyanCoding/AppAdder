@@ -37,6 +37,17 @@ std::string getFilePath(std::string path) {
     return path;
 }
 
+// Writes data to the .desktop file
+void writeData(std::string data, std::string name) {
+    std::string path = homedir;
+    path += "/.local/share/applications/" + name + ".desktop";
+
+    std::ofstream file(path);
+    file << data;
+
+    file.close();
+}
+
 
 MainWindow::~MainWindow() {
     delete ui;
@@ -130,5 +141,7 @@ void MainWindow::on_createButton_clicked() {
     fileContents += "\n[Desktop Action Remove]\n";
     fileContents += "Name=Uninstall app from system\n";
     fileContents += "Exec=rm " + copyToLocation + " " + imageCopyLocation + "\n";
+
+    writeData(fileContents, name.toUtf8().constData());
 }
 
