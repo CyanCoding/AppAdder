@@ -9,6 +9,9 @@
 #include <pwd.h>
 #include <fstream>
 #include <cstdlib>
+#include <string>
+#include <algorithm>
+#include <cctype>
 
 char *homedir;
 
@@ -18,6 +21,19 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     // Get the user's home directory, like '/home/jason'
     struct passwd *pw = getpwuid(getuid());
     homedir = pw->pw_dir;
+}
+
+// Gets the file name from the file path
+// Input: /home/jason/app.AppImage
+// Output: app.AppImage
+std::string getFilePath(std::string path) {
+    const size_t last_slash_idx = path.find_last_of("\\/");
+
+    if (std::string::npos != last_slash_idx) {
+        path = path.erase(0, last_slash_idx + 1);
+    }
+
+    return path;
 }
 
 
@@ -72,8 +88,14 @@ void MainWindow::on_createButton_clicked() {
     appsFolder += "/Applications";
 
     std::string command = "mkdir " + appsFolder;
+    // Copy the application file to the Application folder
+    copyFromLocation = appLocation.toUtf8().constData();
+    copyToLocation = appsFolder + "/" + getFilePath(appLocation.toUtf8().constData());
 
-    std::system(command.c_str());
+    std::ifstream appSource(copyFromLocation, std::ios::binary);
+    std::ofstream appDestination(copyToLocation, std::ios::binary);
+
+    appDestination << appSource.rdbuf();
 
     /*
      * This is the correct form for a .desktop file:
