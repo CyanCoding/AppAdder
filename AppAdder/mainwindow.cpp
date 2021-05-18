@@ -100,8 +100,8 @@ void MainWindow::on_createButton_clicked() {
     appsFolder += "/Applications";
 
     // If the folder doesn't exist, create it.
-    if (std::filesystem::is_directory(appsFolder)
-            || std::filesystem::exists(appsFolder)) {
+    if (!std::filesystem::is_directory(appsFolder)
+            && !std::filesystem::exists(appsFolder)) {
         std::filesystem::create_directory(appsFolder);
     }
 
