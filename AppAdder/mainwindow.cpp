@@ -121,9 +121,10 @@ void MainWindow::on_createButton_clicked() {
 
     fileContents += "[Desktop Entry]\n";
     fileContents += "Name=" + (std::string)name.toUtf8().constData() + "\n"; // Name=AppAdder
-    fileContents += "Exec=" + (std::string)appLocation.toUtf8().constData() + "\n"; //Exec=/home/jason/app.AppImage
+    fileContents += "Exec=" + copyToLocation + "\n"; //Exec=/home/jason/Applications/app.AppImage
     fileContents += "Terminal=" + terminal + "\n"; // Terminal=false
     fileContents += "Type=Application\n";
-    fileContents += "";
+    fileContents += "Icon=" + copyFileName + "\n"; // Icon=/home/jason/.icons/app.png
+    fileContents += "\nTryExec=" + copyToLocation + "\n"; // TryExec=/home/jason/Applications/app.AppImage
 }
 
