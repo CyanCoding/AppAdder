@@ -38,10 +38,7 @@ std::string getFilePath(std::string path) {
 }
 
 // Writes data to the .desktop file
-void writeData(std::string data, std::string name) {
-    std::string path = homedir;
-    path += "/.local/share/applications/" + name + ".desktop";
-
+void writeData(std::string data, std::string path) {
     std::ofstream file(path);
     file << data;
 
@@ -137,11 +134,15 @@ void MainWindow::on_createButton_clicked() {
     fileContents += "Type=Application\n";
     fileContents += "Icon=" + copyFileName + "\n"; // Icon=/home/jason/.icons/app.png
     fileContents += "\nTryExec=" + copyToLocation + "\n"; // TryExec=/home/jason/Applications/app.AppImage
+    fileContents += "Actions=Remove;\n";
 
     fileContents += "\n[Desktop Action Remove]\n";
     fileContents += "Name=Uninstall app from system\n";
-    fileContents += "Exec=rm " + copyToLocation + " " + imageCopyLocation + "\n";
 
-    writeData(fileContents, name.toUtf8().constData());
+    std::string desktopFilePath = homedir;
+    desktopFilePath += "/.local/share/applications/" + (std::string) name.toUtf8().constData() + ".desktop";
+    fileContents += "Exec=rm " + copyToLocation + " " + imageCopyLocation + " " + desktopFilePath + "\n";
+
+    writeData(fileContents, desktopFilePath);
 }
 
