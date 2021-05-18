@@ -12,6 +12,7 @@
 #include <string>
 #include <algorithm>
 #include <cctype>
+#include <filesystem>
 
 char *homedir;
 
@@ -77,17 +78,22 @@ void MainWindow::on_createButton_clicked() {
 
     std::string copyFromLocation = iconLocation.toUtf8().constData();
 
-    std::ifstream src(copyFromLocation, std::ios::binary);
-    std::ofstream dst(copyToLocation, std::ios::binary);
+    std::ifstream imageSource(copyFromLocation, std::ios::binary);
+    std::ofstream imageDestination(copyToLocation, std::ios::binary);
 
-    dst << src.rdbuf();
+    imageDestination << imageSource.rdbuf();
 
     // Create the applications folder if it doesn't already exist
     // /home/jason/Applications
     std::string appsFolder = homedir;
     appsFolder += "/Applications";
 
-    std::string command = "mkdir " + appsFolder;
+    // If the folder doesn't exist, create it.
+    if (std::filesystem::is_directory(appsFolder)
+            || std::filesystem::exists(appsFolder)) {
+        std::filesystem::create_directory(appsFolder);
+    }
+
     // Copy the application file to the Application folder
     copyFromLocation = appLocation.toUtf8().constData();
     copyToLocation = appsFolder + "/" + getFilePath(appLocation.toUtf8().constData());
