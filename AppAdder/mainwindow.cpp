@@ -71,15 +71,15 @@ void MainWindow::on_createButton_clicked() {
         terminal = "true";
 
     // Copy the image file to the /home/jason/.icons folder
-    std::string copyToLocation = homedir;
+    std::string imageCopyLocation = homedir;
     std::string copyFileName = (std::string)name.toUtf8().constData() + ".png";
 
-    copyToLocation += "/.icons/" + copyFileName;
+    imageCopyLocation += "/.icons/" + copyFileName;
 
     std::string copyFromLocation = iconLocation.toUtf8().constData();
 
     std::ifstream imageSource(copyFromLocation, std::ios::binary);
-    std::ofstream imageDestination(copyToLocation, std::ios::binary);
+    std::ofstream imageDestination(imageCopyLocation, std::ios::binary);
 
     imageDestination << imageSource.rdbuf();
 
@@ -96,7 +96,7 @@ void MainWindow::on_createButton_clicked() {
 
     // Copy the application file to the Application folder
     copyFromLocation = appLocation.toUtf8().constData();
-    copyToLocation = appsFolder + "/" + getFilePath(appLocation.toUtf8().constData());
+    std::string copyToLocation = appsFolder + "/" + getFilePath(appLocation.toUtf8().constData());
 
     std::ifstream appSource(copyFromLocation, std::ios::binary);
     std::ofstream appDestination(copyToLocation, std::ios::binary);
@@ -126,5 +126,9 @@ void MainWindow::on_createButton_clicked() {
     fileContents += "Type=Application\n";
     fileContents += "Icon=" + copyFileName + "\n"; // Icon=/home/jason/.icons/app.png
     fileContents += "\nTryExec=" + copyToLocation + "\n"; // TryExec=/home/jason/Applications/app.AppImage
+
+    fileContents += "\n[Desktop Action Remove]\n";
+    fileContents += "Name=Uninstall app from system\n";
+    fileContents += "Exec=rm " + copyToLocation + " " + imageCopyLocation + "\n";
 }
 
