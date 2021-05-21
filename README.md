@@ -1,12 +1,13 @@
 # AppAdder
-On Ubuntu, have you ever run a program or AppImage and the app not had an icon?
-This is a personal pet peeve. I've used [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher)
-to install AppImage files, but sometimes the programs don't have icons.
-
-If this is something you run into, maybe you can relate to the annoyance of not
-having an icon to go with an app you use all the time. AppAdder lets you install
-any kind of app to the dash menu and set a custom icon and name for the file.
+The AppAdder program allows power users to customize their desktop and Linux experience by adding custom apps to the GNOME dash menu.
+If you've ever wanted an executable file/program in the dash, this program easily does that for you and lets you set a custom name/icon.
+AppAdder lets you install any kind of executable to the dash menu and set a custom icon/name for the file.
 
 ## Installation
-Currently, an AppAdder release has not been made official yet, but stay tuned! We expect
-to have the first useable program available by May 18th, 2021!
+AppAdder is packaged as a `.deb` file for installation to your desktop. Future ports (like `.AppImage`, `.rpm`, etc.) will be coming in later versions.
+Check out the [releases](https://github.com/CyanCoding/AppAdder/releases) tab to install the program.
+
+## Uses
+- Let's say you have a script you want to execute every day. It can be tedious to open the command line, locate the file, and run it. This program lets you create an "app" for your file and it'll execute it every time you click on its icon in dash.
+
+- Maybe you have a `.AppImage` you like to run. Every time you want to run it you need to find the file location and open it. It might not even have an icon! This is the 21st century, are we really going to put up with that? _NO!!_ To fix this we run the AppAdder, locate the AppImage, set the icon file, and instantaneously we have placed that AppImage in the dash for super easy access.
