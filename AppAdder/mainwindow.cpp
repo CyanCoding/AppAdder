@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QFile>
 #include <QFileDialog>
+#include <QStandardPaths>
 
 #include <iostream>
 #include <unistd.h>
@@ -12,7 +13,6 @@
 #include <string>
 #include <algorithm>
 #include <cctype>
-#include <filesystem>
 
 char *homedir;
 
@@ -40,6 +40,7 @@ std::string getFilePath(std::string path) {
 // Writes data to the .desktop file
 void writeData(std::string data, std::string path) {
     std::ofstream file(path);
+
     file << data;
 
     file.close();
@@ -78,39 +79,6 @@ void MainWindow::on_createButton_clicked() {
     if (terminalSelected == true)
         terminal = "true";
 
-    // Copy the image file to the /home/jason/.icons folder
-    std::string imageCopyLocation = homedir;
-    std::string copyFileName = (std::string)name.toUtf8().constData() + ".png";
-
-    imageCopyLocation += "/.icons/" + copyFileName;
-
-    std::string copyFromLocation = iconLocation.toUtf8().constData();
-
-    std::ifstream imageSource(copyFromLocation, std::ios::binary);
-    std::ofstream imageDestination(imageCopyLocation, std::ios::binary);
-
-    imageDestination << imageSource.rdbuf();
-
-    // Create the applications folder if it doesn't already exist
-    // /home/jason/Applications
-    std::string appsFolder = homedir;
-    appsFolder += "/Applications";
-
-    // If the folder doesn't exist, create it.
-    if (!std::filesystem::is_directory(appsFolder)
-            && !std::filesystem::exists(appsFolder)) {
-        std::filesystem::create_directory(appsFolder);
-    }
-
-    // Copy the application file to the Application folder
-    copyFromLocation = appLocation.toUtf8().constData();
-    std::string copyToLocation = appsFolder + "/" + getFilePath(appLocation.toUtf8().constData());
-
-    std::ifstream appSource(copyFromLocation, std::ios::binary);
-    std::ofstream appDestination(copyToLocation, std::ios::binary);
-
-    appDestination << appSource.rdbuf();
-
     /*
      * This is the correct form for a .desktop file:
      *
@@ -128,12 +96,13 @@ void MainWindow::on_createButton_clicked() {
     std::string fileContents = "";
 
     fileContents += "[Desktop Entry]\n";
-    fileContents += "Name=" + (std::string)name.toUtf8().constData() + "\n"; // Name=AppAdder
-    fileContents += "Exec=" + copyToLocation + "\n"; //Exec=/home/jason/Applications/app.AppImage
-    fileContents += "Terminal=" + terminal + "\n"; // Terminal=false
     fileContents += "Type=Application\n";
-    fileContents += "Icon=" + copyFileName + "\n"; // Icon=/home/jason/.icons/app.png
-    fileContents += "\nTryExec=" + copyToLocation + "\n"; // TryExec=/home/jason/Applications/app.AppImage
+    fileContents += "Encoding=UTF-8\n";
+    fileContents += "Name=" + (std::string)name.toUtf8().constData() + "\n"; // Name=AppAdder
+    fileContents += "Comment=A simple program\n";
+    fileContents += "Exec=" + (std::string)appLocation.toUtf8().constData() + "\n";
+    fileContents += "Icon=" + (std::string)iconLocation.toUtf8().constData() + "\n";
+    fileContents += "Terminal=" + terminal + "\n"; // Terminal=false
     fileContents += "Actions=Remove;\n";
 
     fileContents += "\n[Desktop Action Remove]\n";
@@ -141,7 +110,8 @@ void MainWindow::on_createButton_clicked() {
 
     std::string desktopFilePath = homedir;
     desktopFilePath += "/.local/share/applications/" + (std::string) name.toUtf8().constData() + ".desktop";
-    fileContents += "Exec=rm " + copyToLocation + " " + imageCopyLocation + " " + desktopFilePath + "\n";
+
+    fileContents += "Exec=rm " + desktopFilePath + "\n";
 
     writeData(fileContents, desktopFilePath);
 }
