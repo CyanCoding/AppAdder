@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>310</width>
+    <width>372</width>
     <height>348</height>
    </rect>
   </property>
@@ -128,7 +128,7 @@
    <widget class="QPushButton" name="createButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>270</x>
       <y>270</y>
       <width>89</width>
       <height>25</height>
@@ -138,13 +138,26 @@
      <string>Create</string>
     </property>
    </widget>
+   <widget class="QLabel" name="iconPreview">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>180</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>310</width>
+     <width>372</width>
      <height>22</height>
     </rect>
    </property>

@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QStandardPaths>
+#include <QPixmap>
 
 #include <iostream>
 #include <unistd.h>
@@ -16,12 +17,24 @@
 
 char *homedir;
 
+void setIcon(QImage image, QLabel *label) {
+    QImage resized = image.scaled(41, 41, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    QPixmap pixmap = QPixmap::fromImage(resized);
+
+    label->setPixmap(pixmap);
+}
+
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
     // Get the user's home directory, like '/home/jason'
     struct passwd *pw = getpwuid(getuid());
     homedir = pw->pw_dir;
+
+    // Set the question mark icon
+    QImage questionMarkIcon(":/Resources/question.png");
+    setIcon(questionMarkIcon, ui->iconPreview);
 }
 
 // Gets the file name from the file path
@@ -57,6 +70,17 @@ void MainWindow::on_locateIcon_clicked() {
 
     // Sets the icon box to the icon's file location
     ui->iconBox->setText(selectedIcon);
+
+    if (selectedIcon != "") {
+        // Set the app icon
+        QImage questionMarkIcon(selectedIcon);
+        setIcon(questionMarkIcon, ui->iconPreview);
+    }
+    else {
+        // Set the question mark icon
+        QImage questionMarkIcon(":/Resources/question.png");
+        setIcon(questionMarkIcon, ui->iconPreview);
+    }
 }
 
 
