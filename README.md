@@ -1,7 +1,11 @@
 # AppAdder
+_This app provides functionality for my new project, the [GNOME Apps Customizer](https://github.com/CyanCoding/GNOME-Apps-Customizer), which builds on the code of the AppAdder. The two apps will be merged together soon and the AppAdder will be discontinued. Future production will continue over at the GNOME Apps Customizer._
+
 The AppAdder program allows power users to customize their desktop and Linux experience by adding custom apps to the GNOME dash menu.
 If you've ever wanted an executable file/program in the dash, this program easily does that for you and lets you set a custom name/icon.
 AppAdder lets you install any kind of executable to the dash menu and set a custom icon/name for the file.
+
+![AppAdder Image](AppAdder.png)
 
 ## Installation
 AppAdder is packaged as a `.deb` file for installation to your desktop. Future ports (like `.AppImage`, `.rpm`, etc.) will be coming in later versions.
